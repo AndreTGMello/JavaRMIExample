@@ -16,24 +16,37 @@ public class PartReal implements Part {
 		this.subComponentes = subComponentes;
 	}
 	
+	@Override
 	public int getCod(){
 		return cod;
 	}
+	
+	@Override
 	public String getNome(){
 		return nome;
 	}
+	
+	@Override
 	public String getDesc(){
 		return desc;
 	}
+	
+	@Override
 	public String getLocalArmazenado(){
 		return localArmazenado;
 	}
+	
+	@Override
 	public ArrayList<Part> getSubComp(){
 		return subComponentes;
 	}
+	
+	@Override
 	public int getQtdSubComp(){
 		return getSubComp().size();
 	}
+	
+	@Override
 	public String primitivaOuAgregada(){
 		if(getQtdSubComp()==0){
 			return "Primitiva";
