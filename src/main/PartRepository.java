@@ -1,7 +1,6 @@
 package main;
 
-import java.rmi.Remote; 
-import java.rmi.RemoteException;
+import java.rmi.*;
 import java.util.ArrayList; 
 
 public interface PartRepository extends Remote{
