@@ -1,15 +1,16 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 public class PartReal implements Part {
 	private int cod;
 	private String nome;
 	private String desc;
 	private String localArmazenado;
-	private ArrayList <Part> subComponentes = new ArrayList<>();
+	private Map<Part, Integer> subComponentes;
 	
-	public PartReal(int cod, String desc, String localArmazenado, ArrayList<Part> subComponentes) {
+	public PartReal(int cod, String desc, String localArmazenado, Map<Part, Integer> subComponentes) {
 		this.cod = cod;
 		this.desc = desc;
 		this.localArmazenado = localArmazenado;
@@ -37,7 +38,7 @@ public class PartReal implements Part {
 	}
 	
 	@Override
-	public ArrayList<Part> getSubComp(){
+	public Map<Part, Integer> getSubComp(){
 		return subComponentes;
 	}
 	
