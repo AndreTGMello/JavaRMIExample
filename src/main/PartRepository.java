@@ -8,4 +8,5 @@ public interface PartRepository extends Remote{
 	ArrayList<Part> getListaPart();
 	Part getPart(int cod);
 	void addPart(Part p);
+	String getNomeArmazem();
 	}

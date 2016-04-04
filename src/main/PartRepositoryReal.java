@@ -31,4 +31,9 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 		partsArmazenadas.add(p);
 	}
 
+	@Override
+	public String getNomeArmazem() {
+		return nomeArmazem;
+	}
+
 }
