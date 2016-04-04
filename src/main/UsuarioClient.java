@@ -72,7 +72,9 @@ public class UsuarioClient {
 				subPecasCorrente = new ArrayList<>();
 			}
 			else if(comando.equals("addsubpart")){
-				subPecasCorrente = new ArrayList<>();
+				System.out.println("Numero de pecas que deseja adicionar: ");
+				int qtd = scan.nextInt();
+				subPecasCorrente.add(pecaCorrente);
 			}
 			else if(comando.equals("addp")){
 				
