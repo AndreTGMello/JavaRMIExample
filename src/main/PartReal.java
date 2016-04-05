@@ -6,15 +6,14 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class PartReal implements Part, Serializable {
-	private static AtomicInteger GERADOR_COD = new AtomicInteger(1000);
 	private int cod;
 	private String nome;
 	private String desc;
 	private String localArmazenado;
 	private Map<Part, Integer> subComponentes;
 	
-	public PartReal(String nome ,String desc, String localArmazenado, Map<Part, Integer> subComponentes) {
-		this.cod = GERADOR_COD.getAndIncrement();
+	public PartReal(int cod, String nome ,String desc, String localArmazenado, Map<Part, Integer> subComponentes) {
+		this.cod = cod;
 		this.nome = nome;
 		this.desc = desc;
 		this.localArmazenado = localArmazenado;

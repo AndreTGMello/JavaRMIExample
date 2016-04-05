@@ -11,12 +11,13 @@ public class RepositoryServer {
 		try{
 			partRepository = new PartRepositoryReal(nomeArmazem);
             Naming.rebind(nomeArmazem,partRepository);
-            System.out.println("ObjetoServidor esta ativo!");
+            System.out.println("\nO servidor esta ativo!"
+            		+ "\nPara encerrar o servidor acione Ctr+C.");
 		}catch(RemoteException re){
-            System.out.println("Erro Remoto: "+re.toString());
+            System.out.println("\nErro Remoto: "+re.toString());
         }
         catch(Exception e){
-            System.out.println("Erro Local: "+e.toString());
+            System.out.println("\nErro Local: "+e.toString());
         }
 	}
 

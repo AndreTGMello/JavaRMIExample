@@ -130,7 +130,7 @@ public class UsuarioClient {
 			}
 			else if(comando.equals("addp")){
 				
-				Part p = criaPeca(subPecasCorrente, repositorioCorrente.getNomeArmazem());
+				Part p = criaPeca(repositorioCorrente, subPecasCorrente);
 				repositorioCorrente.addPart(p);
 				System.out.println("\nPeca cod " + p.getCod() 
 				+ " inserida corretamente no armazem " + repositorioCorrente.getNomeArmazem() + ".");
@@ -167,11 +167,14 @@ public class UsuarioClient {
 
 	}
 
-	private static Part criaPeca(Map<Part, Integer> subComponentes, String localArmazenado) {
+	private static Part criaPeca(PartRepository r, Map<Part, Integer> subComponentes) throws RemoteException {
 		int cod = 0;
 		String nome = "";
 		String desc = "";
+		String localArmazenado = "";
 		Scanner scan = new Scanner(System.in);
+		
+		cod = r.getCodNovaPeca();
 		
 		System.out.println("\nDigite o nome da peca: ");
 		nome = scan.nextLine();
@@ -179,7 +182,9 @@ public class UsuarioClient {
 		System.out.println("\nDigite a descricao da peca: ");
 		desc = scan.nextLine();
 		
-		PartReal p = new PartReal(nome, desc, localArmazenado, subComponentes);
+		localArmazenado = r.getNomeArmazem();
+		
+		PartReal p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
 		return p;
 	}
 
