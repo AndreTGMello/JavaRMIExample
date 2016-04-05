@@ -173,17 +173,13 @@ public class UsuarioClient {
 		String desc = "";
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("\nDigite o codigo da peca: ");
-		cod = scan.nextInt();
-		scan.nextLine();
-		
 		System.out.println("\nDigite o nome da peca: ");
 		nome = scan.nextLine();
 		
 		System.out.println("\nDigite a descricao da peca: ");
 		desc = scan.nextLine();
 		
-		PartReal p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
+		PartReal p = new PartReal(nome, desc, localArmazenado, subComponentes);
 		return p;
 	}
 
