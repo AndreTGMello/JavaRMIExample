@@ -44,8 +44,9 @@ public class UsuarioClient {
 				try {
 					Naming.unbind(repositorioCorrente.getNomeArmazem());
 			        UnicastRemoteObject.unexportObject(repositorioCorrente, true);
+			        System.out.println("\nArmazem fechado com sucesso.");
 				} catch (Exception e) {
-					System.out.println("Erro: " + e.toString());
+					System.out.println("\nErro: " + e.toString());
 				}
 			}
 			else if(comando.equals("listp")){

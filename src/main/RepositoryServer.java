@@ -29,8 +29,10 @@ public class RepositoryServer {
 			if(cmd.equals("shutdown")){
 				Naming.unbind(nomeArmazem);
 		        UnicastRemoteObject.unexportObject(partRepository, true);
+		        System.out.println("\nArmazem fechado.");
+		        break;
 			}
-			else System.out.println("Comando invalido.");
+			else System.out.println("\nComando invalido.");
 		}
 	}
 
