@@ -27,13 +27,14 @@ public class RepositoryServer {
 		while(true){
 			String cmd = sc.next();
 			if(cmd.equals("shutdown")){
-				Naming.unbind(nomeArmazem);
+				Naming.unbind(partRepository.getNomeArmazem());
 		        UnicastRemoteObject.unexportObject(partRepository, true);
 		        System.out.println("\nArmazem fechado.");
 		        break;
 			}
 			else System.out.println("\nComando invalido.");
 		}
+		return;
 	}
 
 }
