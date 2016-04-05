@@ -10,8 +10,9 @@ public class PartReal implements Part {
 	private String localArmazenado;
 	private Map<Part, Integer> subComponentes;
 	
-	public PartReal(int cod, String desc, String localArmazenado, Map<Part, Integer> subComponentes) {
+	public PartReal(int cod, String nome ,String desc, String localArmazenado, Map<Part, Integer> subComponentes) {
 		this.cod = cod;
+		this.nome = nome;
 		this.desc = desc;
 		this.localArmazenado = localArmazenado;
 		this.subComponentes = subComponentes;
