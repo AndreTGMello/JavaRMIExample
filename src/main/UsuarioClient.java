@@ -16,7 +16,7 @@ import javax.swing.*;
 public class UsuarioClient {
 
 	public static void main(String[] args) throws RemoteException {
-		Scanner scan = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in).useDelimiter("\\n");
 		String nomeArmazem = "";
 		PartRepository repositorioCorrente = null;
 		Part pecaCorrente = null;
@@ -105,13 +105,15 @@ public class UsuarioClient {
 				else{
 					subPecasCorrente.put(pecaCorrente, qtd);
 				}
+				System.out.println("\n"+qtd+ " pecas cod "
+						+ pecaCorrente.getCod() + " adicionadas corretamente.");
 				
 			}
 			else if(comando.equals("addp")){
 				
 				Part p = criaPeca(subPecasCorrente, nomeArmazem);
 				repositorioCorrente.addPart(p);
-				System.out.println("Peca cod " + p.getCod() 
+				System.out.println("\nPeca cod " + p.getCod() 
 				+ " inserida corretamente.");
 				
 			}
