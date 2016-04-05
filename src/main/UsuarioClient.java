@@ -42,7 +42,7 @@ public class UsuarioClient {
 			else if(comando.equals("listp")){
 				
 				ArrayList<Part> listaPart = repositorioCorrente.getListaPart();
-				if(listaPart.size()==0){
+				if(listaPart==null || listaPart.size()==0){
 					System.out.println("\nArmazem " 
 							+ repositorioCorrente.getNomeArmazem() 
 							+ " nao contem nenhuma peca.");
@@ -219,6 +219,7 @@ public class UsuarioClient {
 		String desc = "";
 		String localArmazenado = "";
 		Scanner scan = new Scanner(System.in);
+		PartReal p = null;
 		try {
 			cod = r.getCodNovaPeca();
 			
@@ -230,12 +231,12 @@ public class UsuarioClient {
 			
 			localArmazenado = r.getNomeArmazem();
 			
-			PartReal p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
-			return p;	
+			p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
 		} catch (Exception e) {
+			p = null;
 			System.out.println("Erro: " + e.toString());
 		} finally {
-			return null;
+			return p;
 		}
 		
 	}
