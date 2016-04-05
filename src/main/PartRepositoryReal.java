@@ -23,7 +23,17 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 
 	@Override
 	public Part getPart(int cod) throws RemoteException{
-		return partsArmazenadas.get(cod);
+		Part p = null;
+
+		try{
+			p = partsArmazenadas.get(cod);
+		}
+		catch(Exception e){
+			System.out.println("Nao foi possivel encontrar o item desejado."
+					+"\nErro: "+e.toString());
+		}
+		
+		return p;
 	}
 
 	@Override
