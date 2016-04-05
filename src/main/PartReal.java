@@ -1,9 +1,10 @@
 package main;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class PartReal implements Part {
+public class PartReal implements Part, Serializable {
 	private int cod;
 	private String nome;
 	private String desc;
