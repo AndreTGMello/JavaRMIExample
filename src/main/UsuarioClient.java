@@ -33,13 +33,13 @@ public class UsuarioClient {
 				try{
 					repositorioCorrente = (PartRepository) Naming.lookup(nomeArmazem);
 				}catch(RemoteException re){
-				    System.out.println("Erro Remoto: "+re.toString());
+				    System.out.println("\nErro Remoto: "+re.toString());
 			    }
 		        catch(Exception e){
-		        	System.out.println("Erro: " + e.toString());
+		        	System.out.println("\nErro: " + e.toString());
 		        	nomeArmazem = "Erro. Armazem nao encontrado. Tente novamente.";
 		        }
-				System.out.println("Conectado ao armazem: "+nomeArmazem);
+				System.out.println("\nConectado ao armazem:\n"+nomeArmazem);
 			}
 			else if(comando.equals("listp")){
 				
@@ -131,10 +131,26 @@ public class UsuarioClient {
 				
 				break;
 			
+			}else if(comando.equals("help")){
+				System.out.println("\nLista de comandos: "
+						+ "\nhelp"
+						+ "\nbind"
+						+ "\nlistp"
+						+ "\ngetp"
+						+ "\nshowp"
+						+ "\nclearlist"
+						+ "\naddsubpart"
+						+ "\naddpt"
+						+ "\nquit"
+						+ "\n"
+						+ "\nPara executar um comando basta digita-lo, sem a necessidade"
+						+ " de fornecer parametros."
+						+ "\nO programa solicitara as entradas necessarias para a correta"
+						+ " execucao do comando, caso necessario.");
 			}
 			else{
 				
-				System.out.println("Comando invalido.");
+				System.out.println("\nComando invalido.");
 				
 			}
 		}
