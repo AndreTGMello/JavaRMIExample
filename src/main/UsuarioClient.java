@@ -27,7 +27,7 @@ public class UsuarioClient {
 			System.out.println();
 			String comando = scan.next();
 			if(comando.equals("bind")){
-				System.out.println("Insira o nome do armazem a ser acessado:");
+				System.out.println("\nInsira o nome do armazem a ser acessado:");
 				nomeArmazem = scan.next();
 				
 				try{
@@ -38,7 +38,7 @@ public class UsuarioClient {
 		        catch(Exception e){
 		            System.out.println("Erro Local: "+e.toString());
 		        }
-				System.out.println("Armazem " + nomeArmazem + " acessado.");
+				System.out.println("Armazem '" + nomeArmazem + "' acessado.");
 			}
 			else if(comando.equals("listp")){
 				
@@ -50,7 +50,7 @@ public class UsuarioClient {
 			}
 			else if(comando.equals("getp")){
 				
-				System.out.println("Insira o codigo da peca a ser buscada:");
+				System.out.println("\nInsira o codigo da peca a ser buscada:");
 				int cod = scan.nextInt();
 				if(repositorioCorrente.getPart(cod)!=null){
 					pecaCorrente = repositorioCorrente.getPart(cod);
@@ -60,7 +60,7 @@ public class UsuarioClient {
 			}
 			else if(comando.equals("showp")){
 				
-				System.out.println("Codigo da peca: "
+				System.out.println("\nCodigo da peca: "
 						+ pecaCorrente.getCod()
 						+ "\nNome da peca: "
 						+ pecaCorrente.getNome()
@@ -86,11 +86,12 @@ public class UsuarioClient {
 			else if(comando.equals("clearlist")){
 				
 				subPecasCorrente = new HashMap<>();
+				System.out.println("\nLista limpa com sucesso.");
 
 			}
 			else if(comando.equals("addsubpart")){
 			
-				System.out.println("Numero de pecas que deseja adicionar: ");
+				System.out.println("\nNumero de pecas que deseja adicionar: ");
 				int qtd = scan.nextInt();
 				if(subPecasCorrente.containsValue(pecaCorrente)){
 					subPecasCorrente.replace(pecaCorrente, 
@@ -103,14 +104,20 @@ public class UsuarioClient {
 				
 			}
 			else if(comando.equals("addp")){
+				
 				Part p = criaPeca(subPecasCorrente, nomeArmazem);
 				repositorioCorrente.addPart(p);
+				
 			}
 			else if(comando.equals("quit")){
+				
 				break;
+			
 			}
 			else{
+				
 				System.out.println("Comando invalido.");
+				
 			}
 		}
 
@@ -122,13 +129,13 @@ public class UsuarioClient {
 		String desc = "";
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("Digite o codigo da peca: ");
+		System.out.println("\nDigite o codigo da peca: ");
 		cod = scan.nextInt();
 		
-		System.out.println("Digite o nome da peca: ");
+		System.out.println("\nDigite o nome da peca: ");
 		nome = scan.next();
 		
-		System.out.println("Digite a descricao da peca: ");
+		System.out.println("\nDigite a descricao da peca: ");
 		desc = scan.next();
 		
 		PartReal p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
