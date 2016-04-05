@@ -59,13 +59,19 @@ public class UsuarioClient {
 			else if(comando.equals("getp")){
 				
 				System.out.println("\nInsira o codigo da peca a ser buscada:");
-				int cod = scan.nextInt();
-				if(repositorioCorrente.getPart(cod)!=null){
-					pecaCorrente = repositorioCorrente.getPart(cod);
-					System.out.println("\nPeca cod " + pecaCorrente.getCod() 
-							+ " obtida com sucesso.");
+				try{
+					int cod = scan.nextInt();
+					if(repositorioCorrente.getPart(cod)!=null){
+						pecaCorrente = repositorioCorrente.getPart(cod);
+						System.out.println("\nPeca cod " + pecaCorrente.getCod() 
+								+ " obtida com sucesso.");
+					}
+					else System.out.println("\nPeca nao encontrada, tente novamente.");	
 				}
-				else System.out.println("\nPeca nao encontrada, tente novamente.");
+				catch(Exception e){
+					System.out.println("Erro: " + e.toString());
+				}
+				
 				
 			}
 			else if(comando.equals("showp")){
@@ -98,10 +104,14 @@ public class UsuarioClient {
 				
 			}
 			else if(comando.equals("showr")){
-				
-				System.out.println("\nInformacoes sobre o armazem corrente:"
-						+ "\nNome do armazem: " + repositorioCorrente.getNomeArmazem()
-						+ "\nQuantidade de pecas do armazem: " + repositorioCorrente.getListaPart().size());
+				try {
+					System.out.println("\nInformacoes sobre o armazem corrente:"
+							+ "\nNome do armazem: " + repositorioCorrente.getNomeArmazem()
+							+ "\nQuantidade de pecas do armazem: " + repositorioCorrente.getListaPart().size());
+					
+				} catch (Exception e) {
+					System.out.println("Erro: " + e.toString());
+				}
 				
 			}
 			else if(comando.equals("clearlist")){
@@ -114,26 +124,34 @@ public class UsuarioClient {
 			
 				System.out.println("\nNumero de pecas do tipo cod "
 						+ pecaCorrente.getCod() + " que deseja adicionar: ");
-				int qtd = scan.nextInt();
-				if(subPecasCorrente.containsKey(pecaCorrente)){
-					subPecasCorrente.replace(pecaCorrente, 
-							subPecasCorrente.get(pecaCorrente), 
-							subPecasCorrente.get(pecaCorrente)+qtd);
+				try {
+					int qtd = scan.nextInt();
+					if(subPecasCorrente.containsKey(pecaCorrente)){
+						subPecasCorrente.replace(pecaCorrente, 
+								subPecasCorrente.get(pecaCorrente), 
+								subPecasCorrente.get(pecaCorrente)+qtd);
+					}
+					else{
+						subPecasCorrente.put(pecaCorrente, qtd);
+					}
+					System.out.println("\n"+qtd+ " pecas de cod "
+							+ pecaCorrente.getCod() + " adicionadas corretamente"
+									+ " a lista de subpecas corrente.");	
+				} catch (Exception e) {
+					System.out.println("Erro: " + e.toString());
 				}
-				else{
-					subPecasCorrente.put(pecaCorrente, qtd);
-				}
-				System.out.println("\n"+qtd+ " pecas de cod "
-						+ pecaCorrente.getCod() + " adicionadas corretamente"
-								+ " a lista de subpecas corrente.");
 				
 			}
 			else if(comando.equals("addp")){
 				
-				Part p = criaPeca(repositorioCorrente, subPecasCorrente);
-				repositorioCorrente.addPart(p);
-				System.out.println("\nPeca cod " + p.getCod() 
-				+ " inserida corretamente no armazem " + repositorioCorrente.getNomeArmazem() + ".");
+				try {
+					Part p = criaPeca(repositorioCorrente, subPecasCorrente);
+					repositorioCorrente.addPart(p);
+					System.out.println("\nPeca cod " + p.getCod() 
+					+ " inserida corretamente no armazem " + repositorioCorrente.getNomeArmazem() + ".");	
+				} catch (Exception e) {
+					System.out.println("Erro: " + e.toString());
+				}
 				
 			}
 			else if(comando.equals("quit")){
@@ -173,19 +191,25 @@ public class UsuarioClient {
 		String desc = "";
 		String localArmazenado = "";
 		Scanner scan = new Scanner(System.in);
+		try {
+			cod = r.getCodNovaPeca();
+			
+			System.out.println("\nDigite o nome da peca: ");
+			nome = scan.nextLine();
+			
+			System.out.println("\nDigite a descricao da peca: ");
+			desc = scan.nextLine();
+			
+			localArmazenado = r.getNomeArmazem();
+			
+			PartReal p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
+			return p;	
+		} catch (Exception e) {
+			System.out.println("Erro: " + e.toString());
+		} finally {
+			return null;
+		}
 		
-		cod = r.getCodNovaPeca();
-		
-		System.out.println("\nDigite o nome da peca: ");
-		nome = scan.nextLine();
-		
-		System.out.println("\nDigite a descricao da peca: ");
-		desc = scan.nextLine();
-		
-		localArmazenado = r.getNomeArmazem();
-		
-		PartReal p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
-		return p;
 	}
 
 }

@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class PartRepositoryReal extends UnicastRemoteObject implements PartRepository {
 
-	private static AtomicInteger GERADOR_COD = new AtomicInteger(1000);
+	private static AtomicInteger GERADOR_COD = new AtomicInteger(0);
 	ArrayList<Part> partsArmazenadas;
 	String nomeArmazem;
 	
@@ -34,12 +34,12 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 			for (Part part : partsArmazenadas) {
 				if(part.getCod()==cod){
 					p = part;
-					System.out.println("\nPeca encontrada. Cod: " + p.getCod());
+					System.out.println("Peca encontrada. Cod: " + p.getCod());
 				}
 			}
 		}
 		catch(Exception e){
-			System.out.println("\nNao foi possivel encontrar o item desejado."
+			System.out.println("Nao foi possivel encontrar o item desejado."
 					+"\nErro: "+e.toString());
 		}
 		
@@ -55,14 +55,16 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 
 	@Override
 	public String getNomeArmazem() throws RemoteException{
-		System.out.println("Nome do armazem acessado. Retornando: " 
+		System.out.println("\nNome do armazem acessado. Retornando: " 
 				+ this.nomeArmazem);
 		return this.nomeArmazem;
 	}
 
 	@Override
 	public int getCodNovaPeca() throws RemoteException{
-		return GERADOR_COD.getAndIncrement();
+		int cod = GERADOR_COD.getAndIncrement();
+		System.out.println("\nCodigo gerado para nova peca: " + cod);
+		return cod;
 	}
 
 }
