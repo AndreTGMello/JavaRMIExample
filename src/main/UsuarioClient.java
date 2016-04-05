@@ -40,7 +40,6 @@ public class UsuarioClient {
 		        catch(Exception e){
 		            System.out.println("Erro Local: "+e.toString());
 		        }
-				System.out.println("Armazem '" + nomeArmazem + "' acessado.");
 			}
 			else if(comando.equals("listp")){
 				
@@ -56,8 +55,8 @@ public class UsuarioClient {
 				int cod = scan.nextInt();
 				if(repositorioCorrente.getPart(cod)!=null){
 					pecaCorrente = repositorioCorrente.getPart(cod);
-					System.out.println("Peca '" + pecaCorrente.getCod() 
-					+ "' obtida com sucesso.");
+					System.out.println("Peca cod " + pecaCorrente.getCod() 
+					+ " obtida com sucesso.");
 				}
 				else System.out.println("Peca nao encontrada, tente novamente.");
 				
@@ -77,12 +76,13 @@ public class UsuarioClient {
 						+ "\nQuantidade de subcomponentes: "
 						+ pecaCorrente.getQtdSubComp());
 				if(pecaCorrente.getQtdSubComp()>0){
-					System.out.println("Subcomponentes: ");
+					System.out.println("Lista de subcomponentes: ");
 					Map<Part, Integer> subComp = pecaCorrente.getSubComp();
 					for (Map.Entry<Part, Integer> entry : subComp.entrySet())
 					{
-					    System.out.println("Subcomponente" + entry.getValue() 
-					    + ". Quantidade: " + entry.getValue());
+					    System.out.println("Subcomponente codigo: " 
+					    			+ entry.getKey().getCod() 
+					    			+ ". Quantidade: " + entry.getValue());
 					}
 				}
 				
@@ -97,7 +97,7 @@ public class UsuarioClient {
 			
 				System.out.println("\nNumero de pecas que deseja adicionar: ");
 				int qtd = scan.nextInt();
-				if(subPecasCorrente.containsValue(pecaCorrente)){
+				if(subPecasCorrente.containsKey(pecaCorrente)){
 					subPecasCorrente.replace(pecaCorrente, 
 							subPecasCorrente.get(pecaCorrente), 
 							subPecasCorrente.get(pecaCorrente)+qtd);
@@ -111,8 +111,8 @@ public class UsuarioClient {
 				
 				Part p = criaPeca(subPecasCorrente, nomeArmazem);
 				repositorioCorrente.addPart(p);
-				System.out.println("Peca de codigo" + p.getCod() 
-				+ "inserida corretamente.");
+				System.out.println("Peca cod " + p.getCod() 
+				+ " inserida corretamente.");
 				
 			}
 			else if(comando.equals("quit")){
