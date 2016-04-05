@@ -101,7 +101,7 @@ public class UsuarioClient {
 				
 				System.out.println("\nInformacoes sobre o armazem corrente:"
 						+ "\nNome do armazem: " + repositorioCorrente.getNomeArmazem()
-						+ "\nQUantidade de pecas do armazem: " + repositorioCorrente.getListaPart().size());
+						+ "\nQuantidade de pecas do armazem: " + repositorioCorrente.getListaPart().size());
 				
 			}
 			else if(comando.equals("clearlist")){

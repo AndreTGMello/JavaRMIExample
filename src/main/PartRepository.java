@@ -8,5 +8,5 @@ public interface PartRepository extends Remote{
 	Part getPart(int cod) throws RemoteException;
 	void addPart(Part p) throws RemoteException;
 	String getNomeArmazem() throws RemoteException;
-	int getCodNovaPeca();
+	int getCodNovaPeca() throws RemoteException;
 	}

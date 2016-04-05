@@ -61,7 +61,7 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 	}
 
 	@Override
-	public int getCodNovaPeca() {
+	public int getCodNovaPeca() throws RemoteException{
 		return GERADOR_COD.getAndIncrement();
 	}
 
