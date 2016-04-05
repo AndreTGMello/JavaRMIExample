@@ -16,7 +16,7 @@ import javax.swing.*;
 public class UsuarioClient {
 
 	public static void main(String[] args) throws RemoteException {
-		Scanner scan = new Scanner(System.in).useDelimiter("\\n");
+		Scanner scan = new Scanner(System.in);
 		String nomeArmazem = "";
 		PartRepository repositorioCorrente = null;
 		Part pecaCorrente = null;
@@ -28,27 +28,31 @@ public class UsuarioClient {
 			String comando = scan.next();
 			if(comando.equals("bind")){
 				System.out.println("\nInsira o nome do armazem a ser acessado:");
-				nomeArmazem = scan.nextLine();
+				nomeArmazem = scan.next();
 				
 				try{
 					repositorioCorrente = (PartRepository) Naming.lookup(nomeArmazem);
 				}catch(RemoteException re){
-		            System.out.println("Erro Remoto: " + re.toString() + "."
-		            					+ "\nArmazem de nome '" + nomeArmazem 
-		            					+ "' nao foi encontrado.");
-		            nomeArmazem = "Erro. Armazem nao encontrado.";
-		        }
+				    System.out.println("Erro Remoto: "+re.toString());
+			    }
 		        catch(Exception e){
-		            System.out.println("Erro Local: "+e.toString());
+		        	System.out.println("Erro: " + e.toString());
+		        	nomeArmazem = "Erro. Armazem nao encontrado. Tente novamente.";
 		        }
 				System.out.println("Conectado ao armazem: "+nomeArmazem);
 			}
 			else if(comando.equals("listp")){
 				
 				ArrayList<Part> listaPart = repositorioCorrente.getListaPart();
-				for (Part part : listaPart) {
-					System.out.println("Codigo: " + part.getCod() 
-					+ ". Nome: " + part.getNome() + ".");
+				if(listaPart.size()==0){
+					System.out.println("\nArmazem " + nomeArmazem 
+							+ " nao contem nenhuma peca.");
+				}else{
+					System.out.println();
+					for (Part part : listaPart) {
+						System.out.println("Codigo: " + part.getCod() 
+						+ ". Nome: " + part.getNome() + ".");
+					}	
 				}
 			}
 			else if(comando.equals("getp")){
@@ -57,10 +61,10 @@ public class UsuarioClient {
 				int cod = scan.nextInt();
 				if(repositorioCorrente.getPart(cod)!=null){
 					pecaCorrente = repositorioCorrente.getPart(cod);
-					System.out.println("Peca cod " + pecaCorrente.getCod() 
+					System.out.println("\nPeca cod " + pecaCorrente.getCod() 
 					+ " obtida com sucesso.");
 				}
-				else System.out.println("Peca nao encontrada, tente novamente.");
+				else System.out.println("\nPeca nao encontrada, tente novamente.");
 				
 			}
 			else if(comando.equals("showp")){
@@ -82,8 +86,10 @@ public class UsuarioClient {
 					Map<Part, Integer> subComp = pecaCorrente.getSubComp();
 					for (Map.Entry<Part, Integer> entry : subComp.entrySet())
 					{
-					    System.out.println("Subcomponente codigo: " 
-					    			+ entry.getKey().getCod() 
+					    System.out.println("Codigo: " 
+					    			+ entry.getKey().getCod()
+					    			+ ". Local de armazenamento: "
+					    			+ entry.getKey().getLocalArmazenado()
 					    			+ ". Quantidade: " + entry.getValue());
 					}
 				}
@@ -108,8 +114,9 @@ public class UsuarioClient {
 				else{
 					subPecasCorrente.put(pecaCorrente, qtd);
 				}
-				System.out.println("\n"+qtd+ " pecas cod "
-						+ pecaCorrente.getCod() + " adicionadas corretamente.");
+				System.out.println("\n"+qtd+ " pecas de cod "
+						+ pecaCorrente.getCod() + " adicionadas corretamente"
+								+ " a lista de subpecas corrente.");
 				
 			}
 			else if(comando.equals("addp")){
