@@ -146,13 +146,41 @@ public class UsuarioClient {
 				
 				try {
 					Part p = criaPeca(repositorioCorrente, subPecasCorrente);
-					repositorioCorrente.addPart(p);
-					System.out.println("\nPeca cod " + p.getCod() 
-					+ " inserida corretamente no armazem " + repositorioCorrente.getNomeArmazem() + ".");	
+					boolean insere = repositorioCorrente.addPart(p);
+					if(insere){
+						System.out.println("\nPeca cod " + p.getCod() 
+						+ " inserida corretamente no armazem " + repositorioCorrente.getNomeArmazem() + ".");	
+					}
+					else{
+						System.out.println("\nPeca ja existe no repositorio.");
+					}
+						
 				} catch (Exception e) {
 					System.out.println("Erro: " + e.toString());
 				}
 				
+			}
+			else if(comando.equals("removep")){
+				
+				System.out.println("\nInforme o codigo da peca a ser removida do"
+						+ " armazem " + repositorioCorrente.getNomeArmazem() + ".");
+				
+				try {
+					int cod = scan.nextInt();
+					scan.nextLine();
+				
+					boolean remove = repositorioCorrente.removePart(cod);
+					if(remove){
+						System.out.println("\nPeca cod " + cod 
+						+ " removida corretamente no armazem " + repositorioCorrente.getNomeArmazem() + ".");	
+					}
+					else{
+						System.out.println("\nPeca nao existente no repositorio.");
+					}
+						
+				} catch (Exception e) {
+					System.out.println("Erro: " + e.toString());
+				}
 			}
 			else if(comando.equals("quit")){
 				

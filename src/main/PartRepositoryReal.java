@@ -47,10 +47,16 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 	}
 
 	@Override
-	public void addPart(Part p) throws RemoteException{
-		partsArmazenadas.add(p);
-		System.out.println("\nAdicionada peca de codigo: " + p.getCod() 
-				+ " a lista de pecas.");
+	public boolean addPart(Part p) throws RemoteException{
+		if(!partsArmazenadas.contains(p)){
+			partsArmazenadas.add(p);
+			System.out.println("\nAdicionada peca de codigo: " + p.getCod() 
+					+ " a lista de pecas.");
+			return true;
+		}else{
+			System.out.println("Peca inserida ja existe.");
+			return false;
+		}
 	}
 
 	@Override
@@ -65,6 +71,16 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 		int cod = GERADOR_COD.getAndIncrement();
 		System.out.println("\nCodigo gerado para nova peca: " + cod);
 		return cod;
+	}
+
+	@Override
+	public boolean removePart(int cod) throws RemoteException {
+		Part p = getPart(cod);
+		if(p!=null){
+			partsArmazenadas.remove(p);
+			return true;
+		}else
+			return false;
 	}
 
 }
