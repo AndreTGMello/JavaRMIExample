@@ -17,22 +17,22 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 	}
 
 	@Override
-	public ArrayList<Part> getListaPart() {
+	public ArrayList<Part> getListaPart() throws RemoteException{
 		return partsArmazenadas;
 	}
 
 	@Override
-	public Part getPart(int cod) {
+	public Part getPart(int cod) throws RemoteException{
 		return partsArmazenadas.get(cod);
 	}
 
 	@Override
-	public void addPart(Part p) {
+	public void addPart(Part p) throws RemoteException{
 		partsArmazenadas.add(p);
 	}
 
 	@Override
-	public String getNomeArmazem() {
+	public String getNomeArmazem() throws RemoteException{
 		return nomeArmazem;
 	}
 

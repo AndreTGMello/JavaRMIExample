@@ -4,8 +4,8 @@ import java.rmi.*;
 import java.util.ArrayList; 
 
 public interface PartRepository extends Remote{
-	ArrayList<Part> getListaPart();
-	Part getPart(int cod);
-	void addPart(Part p);
-	String getNomeArmazem();
+	ArrayList<Part> getListaPart() throws RemoteException;
+	Part getPart(int cod) throws RemoteException;
+	void addPart(Part p) throws RemoteException;
+	String getNomeArmazem() throws RemoteException;
 	}
