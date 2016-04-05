@@ -2,6 +2,7 @@ package main;
 
 import java.io.File;
 import java.rmi.*;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -38,6 +39,14 @@ public class UsuarioClient {
 		        	nomeArmazem = "Erro. Armazem nao encontrado. Tente novamente.";
 		        }
 				System.out.println("\nConectado ao armazem:\n"+nomeArmazem);
+			}
+			else if(comando.equals("shutdown")){
+				try {
+					Naming.unbind(repositorioCorrente.getNomeArmazem());
+			        UnicastRemoteObject.unexportObject(repositorioCorrente, true);
+				} catch (Exception e) {
+					System.out.println("Erro: " + e.toString());
+				}
 			}
 			else if(comando.equals("listp")){
 				
