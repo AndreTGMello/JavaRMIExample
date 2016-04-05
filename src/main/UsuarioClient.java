@@ -40,15 +40,15 @@ public class UsuarioClient {
 		        }
 				System.out.println("\nConectado ao armazem:\n"+nomeArmazem);
 			}
-			else if(comando.equals("shutdown")){
-				try {
-					Naming.unbind(repositorioCorrente.getNomeArmazem());
-			        UnicastRemoteObject.unexportObject(repositorioCorrente, true);
-			        System.out.println("\nArmazem fechado com sucesso.");
-				} catch (Exception e) {
-					System.out.println("\nErro: " + e.toString());
-				}
-			}
+//			else if(comando.equals("shutdown")){
+//				try {
+//					Naming.unbind(repositorioCorrente.getNomeArmazem());
+//			        UnicastRemoteObject.unexportObject(repositorioCorrente, true);
+//			        System.out.println("\nArmazem fechado com sucesso.");
+//				} catch (Exception e) {
+//					System.out.println("\nErro: " + e.toString());
+//				}
+//			}
 			else if(comando.equals("listp")){
 				
 				ArrayList<Part> listaPart = repositorioCorrente.getListaPart();
@@ -86,30 +86,34 @@ public class UsuarioClient {
 			}
 			else if(comando.equals("showp")){
 				
-				System.out.println("\nInformacoes sobre a peca corrente:"
-						+ "\nCodigo da peca: "
-						+ pecaCorrente.getCod()
-						+ "\nNome da peca: "
-						+ pecaCorrente.getNome()
-						+ "\nDescricao da peca: "
-						+ pecaCorrente.getDesc()
-						+ "\nLocal de armazenamento: "
-						+ pecaCorrente.getLocalArmazenado()
-						+ "\nTipo: "
-						+ pecaCorrente.primitivaOuAgregada()
-						+ "\nQuantidade de subcomponentes: "
-						+ pecaCorrente.getQtdSubComp());
-				if(pecaCorrente.getQtdSubComp()>0){
-					System.out.println("Lista de subcomponentes: ");
-					Map<Part, Integer> subComp = pecaCorrente.getSubComp();
-					for (Map.Entry<Part, Integer> entry : subComp.entrySet())
-					{
-					    System.out.println("Codigo: " 
-					    			+ entry.getKey().getCod()
-					    			+ ". Local de armazenamento: "
-					    			+ entry.getKey().getLocalArmazenado()
-					    			+ ". Quantidade: " + entry.getValue());
+				try {
+					System.out.println("\nInformacoes sobre a peca corrente:"
+							+ "\nCodigo da peca: "
+							+ pecaCorrente.getCod()
+							+ "\nNome da peca: "
+							+ pecaCorrente.getNome()
+							+ "\nDescricao da peca: "
+							+ pecaCorrente.getDesc()
+							+ "\nLocal de armazenamento: "
+							+ pecaCorrente.getLocalArmazenado()
+							+ "\nTipo: "
+							+ pecaCorrente.primitivaOuAgregada()
+							+ "\nQuantidade de subcomponentes: "
+							+ pecaCorrente.getQtdSubComp());
+					if(pecaCorrente.getQtdSubComp()>0){
+						System.out.println("Lista de subcomponentes: ");
+						Map<Part, Integer> subComp = pecaCorrente.getSubComp();
+						for (Map.Entry<Part, Integer> entry : subComp.entrySet())
+						{
+						    System.out.println("Codigo: " 
+						    			+ entry.getKey().getCod()
+						    			+ ". Local de armazenamento: "
+						    			+ entry.getKey().getLocalArmazenado()
+						    			+ ". Quantidade: " + entry.getValue());
+						}
 					}
+				} catch (Exception e) {
+					System.out.println("Erro: " + e.toString());
 				}
 				
 			}
