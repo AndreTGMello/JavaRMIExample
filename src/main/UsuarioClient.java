@@ -33,7 +33,9 @@ public class UsuarioClient {
 				try{
 					repositorioCorrente = (PartRepository) Naming.lookup(nomeArmazem);
 				}catch(RemoteException re){
-		            System.out.println("Erro Remoto: "+re.toString());
+		            System.out.println("Erro Remoto: " + re.toString() + "."
+		            					+ "\nArmazem de nome '" + nomeArmazem 
+		            					+ "' nao foi encontrado.");
 		        }
 		        catch(Exception e){
 		            System.out.println("Erro Local: "+e.toString());
@@ -54,6 +56,8 @@ public class UsuarioClient {
 				int cod = scan.nextInt();
 				if(repositorioCorrente.getPart(cod)!=null){
 					pecaCorrente = repositorioCorrente.getPart(cod);
+					System.out.println("Peca '" + pecaCorrente.getCod() 
+					+ "' obtida com sucesso.");
 				}
 				else System.out.println("Peca nao encontrada, tente novamente.");
 				
@@ -107,6 +111,8 @@ public class UsuarioClient {
 				
 				Part p = criaPeca(subPecasCorrente, nomeArmazem);
 				repositorioCorrente.addPart(p);
+				System.out.println("Peca de codigo" + p.getCod() 
+				+ "inserida corretamente.");
 				
 			}
 			else if(comando.equals("quit")){
