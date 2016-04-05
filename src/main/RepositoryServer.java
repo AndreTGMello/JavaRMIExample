@@ -7,15 +7,17 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.Scanner;
 
 public class RepositoryServer {
-
+	private static String nomeArmazem = "";
+	private static PartRepositoryReal partRepository = null;
+	
 	public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
-		String nomeArmazem = args[0];
-		PartRepositoryReal partRepository = null;
+		nomeArmazem = args[0];
+		partRepository = null;
 		Scanner sc = new Scanner(System.in);
 		
 		try{
 			partRepository = new PartRepositoryReal(nomeArmazem);
-            Naming.rebind(nomeArmazem,partRepository);
+            Naming.rebind(partRepository.getNomeArmazem(),partRepository);
             System.out.println("\nO servidor esta ativo!"
             		+ "\nPara encerrar o servidor digite shutdown.");
 		}catch(RemoteException re){
@@ -27,14 +29,22 @@ public class RepositoryServer {
 		while(true){
 			String cmd = sc.next();
 			if(cmd.equals("shutdown")){
-				Naming.unbind(partRepository.getNomeArmazem());
-		        UnicastRemoteObject.unexportObject(partRepository, true);
-		        System.out.println("\nArmazem fechado.");
+				shutdown();
 		        break;
 			}
 			else System.out.println("\nComando invalido.");
 		}
 		return;
+	}
+
+	private static void shutdown() {
+		try {
+			Naming.unbind(partRepository.getNomeArmazem());
+	        UnicastRemoteObject.unexportObject(partRepository, true);
+	        System.out.println("\nArmazem fechado.");	
+		} catch (Exception e) {
+			System.out.println("Erro: " + e.toString());
+		}
 	}
 
 }
