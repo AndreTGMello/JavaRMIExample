@@ -17,18 +17,16 @@ public class UsuarioClient {
 
 	public static void main(String[] args) throws RemoteException {
 		Scanner scan = new Scanner(System.in);
-		String nomeArmazem = "";
 		PartRepository repositorioCorrente = null;
 		Part pecaCorrente = null;
 		Map<Part, Integer> subPecasCorrente = new HashMap<>();
-		
 		
 		while(true){
 			System.out.println();
 			String comando = scan.next();
 			if(comando.equals("bind")){
 				System.out.println("\nInsira o nome do armazem a ser acessado:");
-				nomeArmazem = scan.next();
+				String nomeArmazem = scan.next();
 				
 				try{
 					repositorioCorrente = (PartRepository) Naming.lookup(nomeArmazem);
@@ -45,13 +43,16 @@ public class UsuarioClient {
 				
 				ArrayList<Part> listaPart = repositorioCorrente.getListaPart();
 				if(listaPart.size()==0){
-					System.out.println("\nArmazem " + nomeArmazem 
+					System.out.println("\nArmazem " 
+							+ repositorioCorrente.getNomeArmazem() 
 							+ " nao contem nenhuma peca.");
 				}else{
-					System.out.println();
+					System.out.println("\nArmazem " 
+							+ repositorioCorrente.getNomeArmazem() 
+							+ " contem as seguintes pecas: ");
 					for (Part part : listaPart) {
 						System.out.println("Codigo: " + part.getCod() 
-						+ ". Nome: " + part.getNome() + ".");
+								+ ". Nome: " + part.getNome() + ".");
 					}	
 				}
 			}
@@ -62,14 +63,15 @@ public class UsuarioClient {
 				if(repositorioCorrente.getPart(cod)!=null){
 					pecaCorrente = repositorioCorrente.getPart(cod);
 					System.out.println("\nPeca cod " + pecaCorrente.getCod() 
-					+ " obtida com sucesso.");
+							+ " obtida com sucesso.");
 				}
 				else System.out.println("\nPeca nao encontrada, tente novamente.");
 				
 			}
 			else if(comando.equals("showp")){
 				
-				System.out.println("\nCodigo da peca: "
+				System.out.println("\nInformacoes sobre a peca corrente:"
+						+ "\nCodigo da peca: "
 						+ pecaCorrente.getCod()
 						+ "\nNome da peca: "
 						+ pecaCorrente.getNome()
@@ -93,6 +95,13 @@ public class UsuarioClient {
 					    			+ ". Quantidade: " + entry.getValue());
 					}
 				}
+				
+			}
+			else if(comando.equals("showr")){
+				
+				System.out.println("\nInformacoes sobre o armazem corrente:"
+						+ "\nNome do armazem: " + repositorioCorrente.getNomeArmazem()
+						+ "\nQUantidade de pecas do armazem: " + repositorioCorrente.getListaPart().size());
 				
 			}
 			else if(comando.equals("clearlist")){
@@ -121,10 +130,10 @@ public class UsuarioClient {
 			}
 			else if(comando.equals("addp")){
 				
-				Part p = criaPeca(subPecasCorrente, nomeArmazem);
+				Part p = criaPeca(subPecasCorrente, repositorioCorrente.getNomeArmazem());
 				repositorioCorrente.addPart(p);
 				System.out.println("\nPeca cod " + p.getCod() 
-				+ " inserida corretamente no armazem " + nomeArmazem + ".");
+				+ " inserida corretamente no armazem " + repositorioCorrente.getNomeArmazem() + ".");
 				
 			}
 			else if(comando.equals("quit")){
@@ -135,9 +144,10 @@ public class UsuarioClient {
 				System.out.println("\nLista de comandos: "
 						+ "\nhelp"
 						+ "\nbind"
+						+ "\nshowr"
+						+ "\nshowp"
 						+ "\nlistp"
 						+ "\ngetp"
-						+ "\nshowp"
 						+ "\nclearlist"
 						+ "\naddsubpart"
 						+ "\naddpt"
