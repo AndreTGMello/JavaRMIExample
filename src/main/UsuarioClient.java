@@ -17,13 +17,13 @@ public class UsuarioClient {
 
 	public static void main(String[] args) throws RemoteException {
 		Scanner scan = new Scanner(System.in);
-		String nomeArmazem = null;
+		String nomeArmazem = "";
 		PartRepository repositorioCorrente = null;
 		Part pecaCorrente = null;
 		Map<Part, Integer> subPecasCorrente = new HashMap<>();
 		
 		
-		while(!scan.next().equals("quit")){
+		while(true){
 			String comando = scan.next();
 			if(comando.equals("bind")){
 				System.out.println("Insira o nome do armazem a ser acessado:");
@@ -105,6 +105,12 @@ public class UsuarioClient {
 			else if(comando.equals("addp")){
 				Part p = criaPeca(subPecasCorrente, nomeArmazem);
 				repositorioCorrente.addPart(p);
+			}
+			else if(comando.equals("quit")){
+				break;
+			}
+			else{
+				System.out.println("Comando invalido.");
 			}
 		}
 
