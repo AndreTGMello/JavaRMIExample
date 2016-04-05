@@ -26,7 +26,11 @@ public class PartRepositoryReal extends UnicastRemoteObject implements PartRepos
 		Part p = null;
 
 		try{
-			p = partsArmazenadas.get(cod);
+			for (Part part : partsArmazenadas) {
+				if(part.getCod()==cod){
+					p = part;
+				}
+			}
 		}
 		catch(Exception e){
 			System.out.println("Nao foi possivel encontrar o item desejado."
