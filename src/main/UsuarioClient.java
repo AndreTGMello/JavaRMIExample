@@ -28,7 +28,7 @@ public class UsuarioClient {
 			String comando = scan.next();
 			if(comando.equals("bind")){
 				System.out.println("\nInsira o nome do armazem a ser acessado:");
-				nomeArmazem = scan.next();
+				nomeArmazem = scan.nextLine();
 				
 				try{
 					repositorioCorrente = (PartRepository) Naming.lookup(nomeArmazem);
@@ -36,10 +36,12 @@ public class UsuarioClient {
 		            System.out.println("Erro Remoto: " + re.toString() + "."
 		            					+ "\nArmazem de nome '" + nomeArmazem 
 		            					+ "' nao foi encontrado.");
+		            nomeArmazem = "Erro. Armazem nao encontrado.";
 		        }
 		        catch(Exception e){
 		            System.out.println("Erro Local: "+e.toString());
 		        }
+				System.out.println("Conectado ao armazem: "+nomeArmazem);
 			}
 			else if(comando.equals("listp")){
 				
@@ -95,7 +97,8 @@ public class UsuarioClient {
 			}
 			else if(comando.equals("addsubpart")){
 			
-				System.out.println("\nNumero de pecas que deseja adicionar: ");
+				System.out.println("\nNumero de pecas do tipo cod "
+						+ pecaCorrente.getCod() + " que deseja adicionar: ");
 				int qtd = scan.nextInt();
 				if(subPecasCorrente.containsKey(pecaCorrente)){
 					subPecasCorrente.replace(pecaCorrente, 
@@ -114,7 +117,7 @@ public class UsuarioClient {
 				Part p = criaPeca(subPecasCorrente, nomeArmazem);
 				repositorioCorrente.addPart(p);
 				System.out.println("\nPeca cod " + p.getCod() 
-				+ " inserida corretamente.");
+				+ " inserida corretamente no armazem " + nomeArmazem + ".");
 				
 			}
 			else if(comando.equals("quit")){
@@ -139,12 +142,13 @@ public class UsuarioClient {
 		
 		System.out.println("\nDigite o codigo da peca: ");
 		cod = scan.nextInt();
+		scan.nextLine();
 		
 		System.out.println("\nDigite o nome da peca: ");
-		nome = scan.next();
+		nome = scan.nextLine();
 		
 		System.out.println("\nDigite a descricao da peca: ");
-		desc = scan.next();
+		desc = scan.nextLine();
 		
 		PartReal p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
 		return p;
