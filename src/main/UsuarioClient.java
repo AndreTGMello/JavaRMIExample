@@ -24,6 +24,7 @@ public class UsuarioClient {
 		
 		
 		while(true){
+			System.out.println();
 			String comando = scan.next();
 			if(comando.equals("bind")){
 				System.out.println("Insira o nome do armazem a ser acessado:");
@@ -37,16 +38,15 @@ public class UsuarioClient {
 		        catch(Exception e){
 		            System.out.println("Erro Local: "+e.toString());
 		        }
-				
+				System.out.println("Armazem " + nomeArmazem + " acessado.");
 			}
 			else if(comando.equals("listp")){
 				
 				ArrayList<Part> listaPart = repositorioCorrente.getListaPart();
 				for (Part part : listaPart) {
-					System.out.print(part+" | ");
+					System.out.println("Codigo: " + part.getCod() 
+					+ ". Nome: " + part.getNome() + ".");
 				}
-				System.out.println();
-				
 			}
 			else if(comando.equals("getp")){
 				
@@ -68,9 +68,9 @@ public class UsuarioClient {
 						+ pecaCorrente.getDesc()
 						+ "\nLocal de armazenamento: "
 						+ pecaCorrente.getLocalArmazenado()
-						+ "Tipo: "
+						+ "\nTipo: "
 						+ pecaCorrente.primitivaOuAgregada()
-						+ "Quantidade de subcomponentes: "
+						+ "\nQuantidade de subcomponentes: "
 						+ pecaCorrente.getQtdSubComp());
 				if(pecaCorrente.getQtdSubComp()>0){
 					System.out.println("Subcomponentes: ");
@@ -129,7 +129,7 @@ public class UsuarioClient {
 		nome = scan.next();
 		
 		System.out.println("Digite a descricao da peca: ");
-		desc = scan.nextLine();
+		desc = scan.next();
 		
 		PartReal p = new PartReal(cod, nome, desc, localArmazenado, subComponentes);
 		return p;
