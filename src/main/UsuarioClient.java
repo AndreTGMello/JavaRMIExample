@@ -40,15 +40,6 @@ public class UsuarioClient {
 		        }
 				System.out.println("\nConectado ao armazem:\n"+nomeArmazem);
 			}
-//			else if(comando.equals("shutdown")){
-//				try {
-//					Naming.unbind(repositorioCorrente.getNomeArmazem());
-//			        UnicastRemoteObject.unexportObject(repositorioCorrente, true);
-//			        System.out.println("\nArmazem fechado com sucesso.");
-//				} catch (Exception e) {
-//					System.out.println("\nErro: " + e.toString());
-//				}
-//			}
 			else if(comando.equals("listp")){
 				
 				ArrayList<Part> listaPart = repositorioCorrente.getListaPart();
@@ -202,21 +193,23 @@ public class UsuarioClient {
 			
 			}else if(comando.equals("help")){
 				System.out.println("\nLista de comandos: "
-						+ "\nhelp"
-						+ "\nbind"
-						+ "\nshowr"
-						+ "\nshowp"
-						+ "\nlistp"
-						+ "\ngetp"
-						+ "\nclearlist"
-						+ "\naddsubpart"
-						+ "\naddpt"
-						+ "\nquit"
+						+ "\nhelp - Exibe essa tela de ajuda."
+						+ "\nbind - Se conecta a um armazem."
+						+ "\nshowr - Exibe informacoes basicas do armazem conectado."
+						+ "\nshowp - Exibe informacoes basicas da peca corrente."
+						+ "\nlistp - Exibe lista de pecas do armazem conectado."
+						+ "\ngetp - Busca e retorna peca presente no armazem conectado."
+						+ "\nclearlist - Limpa lista de subcomponentes corrente."
+						+ "\naddsubpart - Adiciona peca corrente a lista de subcomponentes corrente"
+						+ "\naddp - Adiciona peca ao armazem conectado."
+						+ "\nremovep - Remove peca do armazem corrente."
+						+ "\nquit - Finaliza este programa."
 						+ "\n"
 						+ "\nPara executar um comando basta digita-lo, sem a necessidade"
 						+ " de fornecer parametros."
-						+ "\nO programa solicitara as entradas necessarias para a correta"
-						+ " execucao do comando, caso necessario.");
+						+ "\nO programa solicitara as devidas entradas para a correta"
+						+ " execucao do comando, quando necessario.");
+				
 			}
 			else{
 				
