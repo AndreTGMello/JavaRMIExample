@@ -150,7 +150,7 @@ public class UsuarioClient {
 			else if(comando.equals("showsubpart")){
 				if(!subPecasCorrente.isEmpty()){
 					for (Map.Entry<Part, Integer> entry : subPecasCorrente.entrySet()) { 
-						System.out.println("Cod peca: " + entry.getKey().getCod()
+						System.out.println("\nCod peca: " + entry.getKey().getCod()
 								+ ", Local de armazenamento: " + entry.getKey().getLocalArmazenado()
 								+ ", Qtde: " + entry.getValue()); 
 					}
