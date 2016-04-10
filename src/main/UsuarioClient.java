@@ -147,6 +147,15 @@ public class UsuarioClient {
 				}
 				
 			}
+			else if(comando.equals("showsubpart")){
+				if(!subPecasCorrente.isEmpty()){
+					for (Map.Entry<Part, Integer> entry : subPecasCorrente.entrySet()) { 
+						System.out.println("Cod peca: " + entry.getKey().getCod()
+								+ ", Local de armazenamento: " + entry.getKey().getLocalArmazenado()
+								+ ", Qtde: " + entry.getValue()); 
+					}
+				}else System.out.println("Lista de subpecas corrente esta vazia.");
+			}
 			else if(comando.equals("addp")){
 				
 				try {
@@ -201,6 +210,7 @@ public class UsuarioClient {
 						+ "\ngetp - Busca e retorna peca presente no armazem conectado."
 						+ "\nclearlist - Limpa lista de subcomponentes corrente."
 						+ "\naddsubpart - Adiciona peca corrente a lista de subcomponentes corrente"
+						+ "\nshowsubpart - Exibe lista de subpecas corrente."
 						+ "\naddp - Adiciona peca ao armazem conectado."
 						+ "\nremovep - Remove peca do armazem corrente."
 						+ "\nquit - Finaliza este programa."
