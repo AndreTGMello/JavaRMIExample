@@ -154,7 +154,7 @@ public class UsuarioClient {
 								+ ", Local de armazenamento: " + entry.getKey().getLocalArmazenado()
 								+ ", Qtde: " + entry.getValue()); 
 					}
-				}else System.out.println("Lista de subpecas corrente esta vazia.");
+				}else System.out.println("\nLista de subpecas corrente esta vazia.");
 			}
 			else if(comando.equals("addp")){
 				
